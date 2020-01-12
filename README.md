@@ -16,7 +16,7 @@ Quick setup for new projects, comes with:
 
 More will be added as the boilerplate grows...
 
-## Setup
+## Setup & Installation
 
 - npm i
 - npm run dev

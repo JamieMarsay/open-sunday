@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "./dist/",
+    "module": "esnext",
+    "target": "ES2015",
+    "baseUrl": "src",
+    "allowJs": true,
+    "strict": true,
+    "jsx": "react",
+    "paths": {
+      "@Components/*": ["components/*"],
+      "@Context/*": ["context/*"],
+      "@Assets/*": ["assets/*"],
+      "@Views/*": ["views/*"]
+    }
+  }
+}

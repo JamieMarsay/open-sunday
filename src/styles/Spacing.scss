@@ -1,0 +1,30 @@
+$properties: "all", "top", "right", "bottom", "left";
+$sizes: (
+  "none": 0,
+  "xs": 0.25rem,
+  "s": 0.5rem,
+  "md": 1rem,
+  "xmd": 1.25rem,
+  "lg": 2rem,
+  "xl": 3rem
+);
+
+@each $name, $size in $sizes {
+  @each $prop in $properties {
+    .m--#{$prop}-#{$name} {
+      @if $prop == "all" {
+        margin: $size;
+      } @else {
+        margin-#{$prop}: $size;
+      }
+    }
+
+    .p--#{$prop}-#{$name} {
+      @if $prop == "all" {
+        padding: $size;
+      } @else {
+        padding-#{$prop}: $size;
+      }
+    }
+  }
+}

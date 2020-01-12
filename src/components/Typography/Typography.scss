@@ -1,0 +1,9 @@
+.text {
+  &--bold {
+    font-weight: bold;
+  }
+
+  &--capitalise {
+    text-transform: capitalize;
+  }
+}

@@ -1,0 +1,15 @@
+.flex {
+  display: flex;
+
+  &--centre {
+    justify-content: center;
+  }
+
+  &--stack {
+    flex-direction: column;
+  }
+
+  &--end {
+    justify-content: flex-end;
+  }
+}

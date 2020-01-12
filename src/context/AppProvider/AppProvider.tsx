@@ -21,7 +21,7 @@ export const AppProvider: FunctionComponent<IProvider> = ({
     toggleLoading(true);
     try {
       const responses = await Promise.all(
-        urls.map((url: string) => fetch(url))
+        urls.map((url: string) => fetch(url, { mode: "cors" }))
       );
       const finalData = await Promise.all(
         responses.map((response: any) => {
@@ -34,6 +34,7 @@ export const AppProvider: FunctionComponent<IProvider> = ({
       );
       setData(finalData);
     } catch (err) {
+      console.error(err);
       setError(err);
     }
     toggleLoading(false);

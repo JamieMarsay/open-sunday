@@ -4,7 +4,7 @@ import { ISelect } from "./ISelect";
 const Select: FunctionComponent<ISelect> = ({ options }) => (
   <select>
     {options.map(option => (
-      <option>{option}</option>
+      <option key={option}>{option}</option>
     ))}
   </select>
 );

@@ -1,4 +1,4 @@
-import React, { useState, FunctionComponent } from "react";
+import React, { useState, FunctionComponent, useEffect } from "react";
 // @ts-ignore
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
@@ -6,7 +6,7 @@ interface IMap {
   google: any;
 }
 const MapContainer: FunctionComponent<IMap> = ({ google }) => {
-  const [test, setTest] = useState();
+  const [test, setTest] = useState([]);
 
   const fetchPlaces = (mapProps: any, map: any) => {
     const { google } = mapProps;
@@ -28,37 +28,41 @@ const MapContainer: FunctionComponent<IMap> = ({ google }) => {
           radius: 500,
           type: ["store"]
         },
-        (results: any, status: any, pagination: any) =>
-          setTest(results.map((i: any) => i))
+        (results: any, status: any, pagination: any) => {
+          const test2 = [];
+          for (const result of results) {
+            service.getDetails(
+              {
+                placeId: result.place_id,
+                fields: ["name", "opening_hours", "geometry", "place_id"]
+              },
+              (place: any) => place && setTest(prev => [...prev, place] as any)
+            );
+          }
+        }
       );
     });
   };
 
   return (
     <Map google={google} zoom={14} onReady={fetchPlaces}>
-      {test
-        ? test.map((i: any) => (
-            <Marker
-              key={i.name}
-              title={i.name}
-              name={i.name}
-              position={{
-                lat: i.geometry.location.lat(),
-                lng: i.geometry.location.lng()
-              }}
-            />
-          ))
-        : null}
-      <InfoWindow onClose={() => console.log("test close")}>
-        <div>
-          <h1>test</h1>
-        </div>
-      </InfoWindow>
+      {test.map((i: any, index: number) => (
+        <Marker
+          key={i.place_id}
+          title={i.name}
+          name={i.name}
+          position={{
+            lat: i.geometry.location.lat(),
+            lng: i.geometry.location.lng()
+          }}
+        />
+      ))}
     </Map>
   );
 };
 
 export default GoogleApiWrapper({
   apiKey: process.env.REACT_APP_MAPS_KEY,
-  libraries: ["places"]
+  libraries: ["places"],
+  region: "GB"
 })(MapContainer);

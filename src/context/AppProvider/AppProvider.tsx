@@ -21,7 +21,7 @@ export const AppProvider: FunctionComponent<IProvider> = ({
     toggleLoading(true);
     try {
       const responses = await Promise.all(
-        urls.map((url: string) => fetch(url, { mode: "cors" }))
+        urls.map((url: string) => fetch(url))
       );
       const finalData = await Promise.all(
         responses.map((response: any) => {

@@ -34,6 +34,7 @@ export const AppProvider: FunctionComponent<IProvider> = ({
       );
       setData(finalData);
     } catch (err) {
+      console.error(err);
       setError(err);
     }
     toggleLoading(false);

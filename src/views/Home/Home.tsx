@@ -1,14 +1,29 @@
 import React, { FunctionComponent } from "react";
+import { AppProvider, AppContext } from "@Context/AppProvider/AppProvider";
 import Heading from "@Components/Heading/Heading";
 import Select from "@Components/Select/Select";
+// @ts-ignore
+import GoogleMapReact from "google-map-react";
 import Paper from "@Components/Paper/Paper";
+import Map from "@Components/Map/Map";
+import Body from "./HomeBody";
 
 const Home: FunctionComponent = () => (
   <section>
     <Heading title="Open Sunday" />
-    <Paper title="Select">
-      <Select options={["1", "2"]} />
-    </Paper>
+    <Map />
+
+    {/* <Paper title="Select">
+          <Select options={["1", "2"]} />
+        </Paper>
+        <div style={{ height: "500px", width: "100%" }}>
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: process.env.REACT_APP_MAPS_KEY }}
+            yesIWantToUseGoogleMapApiInternals
+            defaultCenter={[53.84277, -1.63488]}
+            defaultZoom={11}
+          />
+        </div> */}
   </section>
 );
 

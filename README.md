@@ -1,20 +1,16 @@
-# Jamie's React Boilerplate
+# Open Sunday
 
-## Yet another React boilerplate! 🙃
+## What?
 
-Quick setup for new projects, comes with:
+A tool that allows you to search for businesses that are open on a Sunday, in a given area.
 
-- [React](https://reactjs.org/)
-- [React-Router](https://reacttraining.com/react-router/)
-- [Webpack](https://webpack.js.org/)
-- [Webpack Dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server)
-- [TypeScript](https://www.typescriptlang.org/)
-- [SASS loader](https://github.com/webpack-contrib/sass-loader)
-- [File loader](https://webpack.js.org/loaders/file-loader/)
-- [CSS Nano](https://cssnano.co/)
-- [HTML Webpack Plugin](https://github.com/jantimon/html-webpack-plugin)
+## Why?
 
-More will be added as the boilerplate grows...
+We struggled to find a barbershop that was open on a Sunday and thus, the idea was born!
+
+## How?
+
+Magical Magic
 
 ## Setup & Installation
 

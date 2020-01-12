@@ -27,7 +27,7 @@ module.exports = (env, options) => {
       new HTMLTemplate({
         favicon: path.resolve(__dirname, "src/favicon.ico"),
         template: path.resolve(__dirname, "src/index.html"),
-        title: "React Boilerplate",
+        title: "Jamie's Boiler",
         filename: "index.html"
       }),
       new MiniCssExtract({

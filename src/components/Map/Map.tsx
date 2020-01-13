@@ -1,19 +1,20 @@
-import React, { useState, FunctionComponent } from "react";
+import React, { useState, FunctionComponent, Fragment } from "react";
 // @ts-ignore
-import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Map, Marker, GoogleApiWrapper, Circle } from "google-maps-react";
+import home from "@Assets/home.svg";
 
 interface IMap {
   google: any;
 }
 const MapContainer: FunctionComponent<IMap> = ({ google }) => {
-  console.count("render");
   const [test, setTest] = useState([]);
+  const [latLng, setLatLng] = useState();
 
   const fetchPlaces = async (mapProps: any, map: any) => {
     const { google } = mapProps;
     const service = new google.maps.places.PlacesService(map);
     const geocoder = new google.maps.Geocoder();
-    const postCode = "wf1 2hz";
+    const postCode = "ls8 2ap";
 
     const test2: any = () =>
       new Promise((res: any) => {
@@ -22,7 +23,9 @@ const MapContainer: FunctionComponent<IMap> = ({ google }) => {
             address: postCode
           },
           (results: any, status: any) => {
+            setLatLng(results[0].geometry.location);
             map.setCenter(results[0].geometry.location);
+            map.setZoom(14);
             res(results[0].geometry.location);
           }
         );
@@ -36,7 +39,7 @@ const MapContainer: FunctionComponent<IMap> = ({ google }) => {
           {
             location: { lat: location.lat(), lng: location.lng() },
             radius: 1609.34,
-            type: ["pharmacy"]
+            type: ["bar"]
           },
           (results: any) => {
             res(results);
@@ -81,15 +84,19 @@ const MapContainer: FunctionComponent<IMap> = ({ google }) => {
       (item: any) => item.opening_hours && item.opening_hours.periods[6]
     );
     setTest(openSunday);
-    // setTest(
-    //   allBusinessesWithHours.filter(
-    //     (item: any) => item !== null || !item.opening_hours.periods[6]
-    //   )
-    // );
   };
 
   return (
-    <Map google={google} zoom={14} onReady={fetchPlaces}>
+    <Map
+      style={{ maxWidth: "1440px", height: "100%" }}
+      onReady={fetchPlaces}
+      initialCenter={{
+        lat: 51.509865,
+        lng: -0.118092
+      }}
+      google={google}
+      zoom={5}
+    >
       {test.map((i: any, index: number) => (
         <Marker
           key={i.place_id}
@@ -101,6 +108,35 @@ const MapContainer: FunctionComponent<IMap> = ({ google }) => {
           }}
         />
       ))}
+      {latLng ? (
+        <Marker
+          title="You"
+          position={{
+            lat: latLng.lat(),
+            lng: latLng.lng()
+          }}
+          style={{ backgroundColor: "blue" }}
+          ico={{
+            url: home,
+            anchor: new google.maps.Point(32, 32),
+            scaledSize: new google.maps.Size(64, 64)
+          }}
+        />
+      ) : null}
+      {latLng ? (
+        <Circle
+          center={{ lat: latLng.lat(), lng: latLng.lng() }}
+          radius={1609.34}
+          strokeColor="red"
+          // onMouseover={() => console.log("mouseover")}
+          // onClick={() => console.log("click")}
+          // onMouseout={() => console.log("mouseout")}
+          strokeOpacity={0}
+          strokeWeight={5}
+          fillColor="#FF0000"
+          fillOpacity={0.2}
+        />
+      ) : null}
     </Map>
   );
 };

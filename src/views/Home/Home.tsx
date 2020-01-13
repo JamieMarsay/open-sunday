@@ -10,7 +10,6 @@ import Body from "./HomeBody";
 
 const Home: FunctionComponent = () => (
   <section>
-    <Heading title="Open Sunday" />
     <Map />
 
     {/* <Paper title="Select">

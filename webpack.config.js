@@ -35,7 +35,7 @@ module.exports = (env, options) => {
       new HTMLTemplate({
         favicon: path.resolve(__dirname, "src/favicon.ico"),
         template: path.resolve(__dirname, "src/index.html"),
-        title: "Open Sunday",
+        title: "Sandbox",
         filename: "index.html"
       }),
       new MiniCssExtract({

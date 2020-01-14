@@ -24,6 +24,10 @@ const MapV2 = () => {
     });
   };
 
+  const addMarker = () => {
+    marker.current = createMarker();
+  };
+
   useEffect(() => {
     const mapScript = document.createElement("script");
     mapScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_KEY}&libraries=places`;
@@ -31,7 +35,7 @@ const MapV2 = () => {
 
     mapScript.addEventListener("load", () => {
       googleMap.current = createGoogleMap();
-      marker.current = createMarker();
+      // marker.current = createMarker();
     });
   });
 
@@ -41,6 +45,7 @@ const MapV2 = () => {
         id="google-map"
         ref={googleMapRef}
         style={{ width: "100%", height: "100vh" }}
+        onClick={() => addMarker()}
       />
     )
   );

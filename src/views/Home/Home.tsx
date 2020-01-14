@@ -2,17 +2,12 @@ import React, { FunctionComponent } from "react";
 import { AppProvider, AppContext } from "@Context/AppProvider/AppProvider";
 import Heading from "@Components/Heading/Heading";
 import Select from "@Components/Select/Select";
-// @ts-ignore
-import GoogleMapReact from "google-map-react";
-import Paper from "@Components/Paper/Paper";
-// import Map from "@Components/Map/Map";
-import MapV2 from "@Components/MapV2/MapV2";
+import Map from "@Components/Map/Map";
 import Body from "./HomeBody";
 
 const Home: FunctionComponent = () => (
   <section>
-    {/* <Map /> */}
-    <MapV2 />
+    <Map />
 
     {/* <Paper title="Select">
           <Select options={["1", "2"]} />

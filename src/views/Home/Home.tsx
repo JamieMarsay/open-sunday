@@ -5,12 +5,14 @@ import Select from "@Components/Select/Select";
 // @ts-ignore
 import GoogleMapReact from "google-map-react";
 import Paper from "@Components/Paper/Paper";
-import Map from "@Components/Map/Map";
+// import Map from "@Components/Map/Map";
+import MapV2 from "@Components/MapV2/MapV2";
 import Body from "./HomeBody";
 
 const Home: FunctionComponent = () => (
   <section>
-    <Map />
+    {/* <Map /> */}
+    <MapV2 />
 
     {/* <Paper title="Select">
           <Select options={["1", "2"]} />

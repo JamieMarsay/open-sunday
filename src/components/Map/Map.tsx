@@ -1,4 +1,4 @@
-import React, { useState, FunctionComponent, useEffect, Fragment } from "react";
+import React, { useState, FunctionComponent } from "react";
 import {
   Map,
   Marker,
@@ -8,11 +8,17 @@ import {
 } from "google-maps-react";
 import Spinner from "@Components/Spinner/Spinner";
 import pin from "@Assets/pin.svg";
+import { testLatLng, testPlaces } from "@TestData/testData";
+import Menu from "@Components/Menu/Menu";
 
 interface IMap {
   google: any;
 }
-const MapContainer: FunctionComponent<IMap> = ({ google }) => {
+const MapContainer: FunctionComponent<IMap> = ({
+  businessType,
+  searchLocation,
+  google
+}) => {
   const [finalBusinesses, setFinalBusinesses] = useState([]);
   const [loading, toggleLoading] = useState(false);
   const [latLng, setLatLng] = useState();
@@ -20,23 +26,24 @@ const MapContainer: FunctionComponent<IMap> = ({ google }) => {
   const [selectedPlace, setSelectedPlace] = useState();
   const [visisble, setVisible] = useState();
 
-  const onMarkerClick = (props, marker) => {
-    setActiveMarker(marker);
-    setSelectedPlace(props);
-    setVisible(true);
-  };
+  // const onMarkerClick = (props, marker) => {
+  //   setActiveMarker(marker);
+  //   setSelectedPlace(props);
+  //   setVisible(true);
+  // };
 
   const fetchPlaces = async (mapProps: any, map: any) => {
+    console.log(searchLocation);
+    console.log(businessType);
     const { google } = mapProps;
     const service = new google.maps.places.PlacesService(map);
     const geocoder = new google.maps.Geocoder();
-    const postCode = "ls18 5aa";
 
     const setLocation: any = () =>
       new Promise((res: any) => {
         geocoder.geocode(
           {
-            address: postCode
+            address: searchLocation
           },
           (results: any, status: any) => {
             setLatLng(results[0].geometry.location);
@@ -55,7 +62,7 @@ const MapContainer: FunctionComponent<IMap> = ({ google }) => {
           {
             location: { lat: location.lat(), lng: location.lng() },
             radius: 1609.34,
-            type: ["restaurant"]
+            type: [`${businessType}`]
           },
           (results: any) => {
             res(results);
@@ -109,12 +116,8 @@ const MapContainer: FunctionComponent<IMap> = ({ google }) => {
         <Map
           style={{ maxWidth: "1440px", height: "100%" }}
           onReady={fetchPlaces}
-          // onReady={() => console.log("test")}
-          // fullscreenControl={false}
-          // streetViewControl={false}
-          // mapTypeControl={false}
-          // zoomControl={false}
           disableDefaultUI
+          // @ts-ignore
           styles={[
             {
               featureType: "administrative",
@@ -349,6 +352,21 @@ const MapContainer: FunctionComponent<IMap> = ({ google }) => {
           google={google}
           zoom={5}
         >
+          {/* {testPlaces.map((i: any) => (
+            <Marker
+              key={i.place_id}
+              title={i.name}
+              position={{
+                lat: i.geometry.location.lat(),
+                lng: i.geometry.location.lng()
+              }}
+              icon={{
+                url: pin,
+                anchor: new google.maps.Point(20, 20),
+                scaledSize: new google.maps.Size(40, 40)
+              }}
+            />
+          ))} */}
           {finalBusinesses.map((i: any, index: number) => (
             <Marker
               key={i.place_id}
@@ -362,7 +380,7 @@ const MapContainer: FunctionComponent<IMap> = ({ google }) => {
                 anchor: new google.maps.Point(20, 20),
                 scaledSize: new google.maps.Size(40, 40)
               }}
-              onClick={onMarkerClick}
+              // onClick={onMarkerClick}
             />
           ))}
           <InfoWindow
@@ -386,8 +404,20 @@ const MapContainer: FunctionComponent<IMap> = ({ google }) => {
               radius={1609.34}
             />
           ) : null}
+          <Circle
+            center={{ lat: testLatLng.lat, lng: testLatLng.lng }}
+            fillColor="#4da0ff"
+            strokeColor="#4da0ff"
+            fillOpacity={0.1}
+            strokeOpacity={0.1}
+            strokeWeight={3}
+            radius={1609.34}
+          />
         </Map>
       </div>
+      {latLng && finalBusinesses.length > 0 ? (
+        <Menu items={finalBusinesses} type={businessType} />
+      ) : null}
       {loading ? <Spinner /> : null}
     </div>
   );

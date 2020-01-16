@@ -4,10 +4,12 @@ import Heading from "@Components/Heading/Heading";
 import Select from "@Components/Select/Select";
 import Map from "@Components/Map/Map";
 import Body from "./HomeBody";
+import Search from "@Components/Search/Search";
 
 const Home: FunctionComponent = () => (
   <section>
-    <Map />
+    {/* <Map /> */}
+    <Search />
 
     {/* <Paper title="Select">
           <Select options={["1", "2"]} />

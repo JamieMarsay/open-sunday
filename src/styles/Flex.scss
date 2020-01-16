@@ -5,6 +5,10 @@
     justify-content: center;
   }
 
+  &--v-centre {
+    align-items: center;
+  }
+
   &--stack {
     flex-direction: column;
   }

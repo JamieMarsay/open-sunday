@@ -6,6 +6,7 @@ import {
   Route
 } from "react-router-dom";
 import Main from "@Components/Main/Main";
+import Results from "@Views/Results/Results";
 import FourOhFour from "@Views/404/404";
 import Home from "@Views/Home/Home";
 
@@ -13,6 +14,10 @@ const routes = [
   {
     view: Home,
     path: "/home"
+  },
+  {
+    view: Results,
+    path: "/results/:type/:location"
   },
   {
     view: FourOhFour,

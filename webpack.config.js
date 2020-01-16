@@ -22,6 +22,7 @@ module.exports = (env, options) => {
       extensions: [".tsx", ".ts", ".js"],
       alias: {
         ["@Components"]: path.resolve(__dirname, "./src/components/"),
+        ["@TestData"]: path.resolve(__dirname, "./src/testData/"),
         ["@Context"]: path.resolve(__dirname, "./src/context/"),
         ["@Assets"]: path.resolve(__dirname, "./src/assets/"),
         ["@Views"]: path.resolve(__dirname, "./src/views/")
@@ -35,7 +36,7 @@ module.exports = (env, options) => {
       new HTMLTemplate({
         favicon: path.resolve(__dirname, "src/favicon.ico"),
         template: path.resolve(__dirname, "src/index.html"),
-        title: "Open Sunday",
+        title: "Sandbox",
         filename: "index.html"
       }),
       new MiniCssExtract({
@@ -71,7 +72,7 @@ module.exports = (env, options) => {
           ]
         },
         {
-          test: /\.(png|svg|jpg|gif)$/,
+          test: /\.(png|svg|jpg|gif|ttf)$/,
           use: ["file-loader"]
         }
       ]

@@ -1,12 +1,14 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { ISelect } from "./ISelect";
 
-const Select: FunctionComponent<ISelect> = ({ options }) => (
-  <select>
-    {options.map(option => (
-      <option key={option}>{option}</option>
-    ))}
-  </select>
-);
+const Select: FunctionComponent<ISelect> = ({ options, action }) => {
+  return (
+    <select onChange={action}>
+      {options.map(option => (
+        <option key={option}>{option}</option>
+      ))}
+    </select>
+  );
+};
 
 export default Select;

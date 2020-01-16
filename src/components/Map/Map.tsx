@@ -1,42 +1,68 @@
 import React, { useState, FunctionComponent } from "react";
-// @ts-ignore
-import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import {
+  Map,
+  Marker,
+  GoogleApiWrapper,
+  Circle,
+  InfoWindow
+} from "google-maps-react";
+import Spinner from "@Components/Spinner/Spinner";
+import pin from "@Assets/pin.svg";
+import { testLatLng, testPlaces } from "@TestData/testData";
+import Menu from "@Components/Menu/Menu";
 
 interface IMap {
   google: any;
 }
-const MapContainer: FunctionComponent<IMap> = ({ google }) => {
-  console.count("render");
-  const [test, setTest] = useState([]);
+const MapContainer: FunctionComponent<IMap> = ({
+  businessType,
+  searchLocation,
+  google
+}) => {
+  const [finalBusinesses, setFinalBusinesses] = useState([]);
+  const [loading, toggleLoading] = useState(false);
+  const [latLng, setLatLng] = useState();
+  const [activeMarker, setActiveMarker] = useState();
+  const [selectedPlace, setSelectedPlace] = useState();
+  const [visisble, setVisible] = useState();
+
+  // const onMarkerClick = (props, marker) => {
+  //   setActiveMarker(marker);
+  //   setSelectedPlace(props);
+  //   setVisible(true);
+  // };
 
   const fetchPlaces = async (mapProps: any, map: any) => {
+    console.log(searchLocation);
+    console.log(businessType);
     const { google } = mapProps;
     const service = new google.maps.places.PlacesService(map);
     const geocoder = new google.maps.Geocoder();
-    const postCode = "wf1 2hz";
 
-    const test2: any = () =>
+    const setLocation: any = () =>
       new Promise((res: any) => {
         geocoder.geocode(
           {
-            address: postCode
+            address: searchLocation
           },
           (results: any, status: any) => {
+            setLatLng(results[0].geometry.location);
             map.setCenter(results[0].geometry.location);
+            map.setZoom(14);
             res(results[0].geometry.location);
           }
         );
       });
 
-    const location = await test2();
+    const location = await setLocation();
 
-    const test3: any = () =>
+    const getNearbyBusinesses: any = () =>
       new Promise((res: any) => {
         service.nearbySearch(
           {
             location: { lat: location.lat(), lng: location.lng() },
             radius: 1609.34,
-            type: ["pharmacy"]
+            type: [`${businessType}`]
           },
           (results: any) => {
             res(results);
@@ -44,25 +70,9 @@ const MapContainer: FunctionComponent<IMap> = ({ google }) => {
         );
       });
 
-    const allBusinesses = await test3();
+    const nearbyBusinesses = await getNearbyBusinesses();
 
-    const test4: any = () =>
-      new Promise(async (res: any) => {
-        const need = await allBusinesses.reduce(
-          async (acc: any, business: any) => {
-            let asyncAcc = await acc;
-
-            return new Promise(async res => {
-              const result = await test5(business);
-              res([...asyncAcc, result]);
-            });
-          },
-          []
-        );
-        res(need);
-      });
-
-    const test5 = (business: any) =>
+    const getOpeningTimes = (business: any) =>
       new Promise(res =>
         service.getDetails(
           {
@@ -73,40 +83,348 @@ const MapContainer: FunctionComponent<IMap> = ({ google }) => {
         )
       );
 
-    const allBusinessesWithHours = await test4();
-    const finalBusinesses = allBusinessesWithHours.filter(
-      (item: any) => item !== null
-    );
-    const openSunday = finalBusinesses.filter(
-      (item: any) => item.opening_hours && item.opening_hours.periods[6]
-    );
-    setTest(openSunday);
-    // setTest(
-    //   allBusinessesWithHours.filter(
-    //     (item: any) => item !== null || !item.opening_hours.periods[6]
-    //   )
-    // );
+    const setOpeningTimes: any = () =>
+      new Promise(async (res: any) => {
+        const need = await nearbyBusinesses.reduce(
+          async (acc: any, business: any) => {
+            let asyncAcc = await acc;
+
+            return new Promise(async res => {
+              const result = await getOpeningTimes(business);
+              res(
+                [...asyncAcc, result].filter(
+                  (item: any) =>
+                    item !== null &&
+                    item.opening_hours &&
+                    item.opening_hours.periods[6]
+                )
+              );
+            });
+          },
+          []
+        );
+        res(need);
+      });
+
+    setFinalBusinesses(await setOpeningTimes());
+    toggleLoading(false);
   };
 
   return (
-    <Map google={google} zoom={14} onReady={fetchPlaces}>
-      {test.map((i: any, index: number) => (
-        <Marker
-          key={i.place_id}
-          title={i.name}
-          name={i.name}
-          position={{
-            lat: i.geometry.location.lat(),
-            lng: i.geometry.location.lng()
+    <div style={{ position: "relative", height: "100vh" }}>
+      <div className={`${loading ? "opacity--none" : "fade--in"}`}>
+        <Map
+          style={{ maxWidth: "1440px", height: "100%" }}
+          onReady={fetchPlaces}
+          disableDefaultUI
+          // @ts-ignore
+          styles={[
+            {
+              featureType: "administrative",
+              elementType: "all",
+              stylers: [
+                {
+                  hue: "#0060ff"
+                },
+                {
+                  lightness: -100
+                },
+                {
+                  visibility: "off"
+                },
+                {
+                  saturation: "-77"
+                }
+              ]
+            },
+            {
+              featureType: "administrative",
+              elementType: "labels.text.fill",
+              stylers: [
+                {
+                  visibility: "on"
+                },
+                {
+                  color: "#848ea4"
+                }
+              ]
+            },
+            {
+              featureType: "landscape",
+              elementType: "geometry",
+              stylers: [
+                {
+                  hue: "#0060ff"
+                },
+                {
+                  saturation: "-70"
+                },
+                {
+                  lightness: "0"
+                },
+                {
+                  visibility: "on"
+                }
+              ]
+            },
+            {
+              featureType: "landscape",
+              elementType: "geometry.fill",
+              stylers: [
+                {
+                  hue: "#0050ff"
+                },
+                {
+                  saturation: "0"
+                },
+                {
+                  lightness: "0"
+                }
+              ]
+            },
+            {
+              featureType: "landscape",
+              elementType: "labels",
+              stylers: [
+                {
+                  hue: "#0060ff"
+                },
+                {
+                  saturation: "-80"
+                },
+                {
+                  lightness: "-90"
+                },
+                {
+                  visibility: "off"
+                }
+              ]
+            },
+            {
+              featureType: "poi",
+              elementType: "all",
+              stylers: [
+                {
+                  hue: "#0060ff"
+                },
+                {
+                  saturation: "-80"
+                },
+                {
+                  lightness: "-70"
+                },
+                {
+                  visibility: "off"
+                },
+                {
+                  gamma: "1"
+                }
+              ]
+            },
+            {
+              featureType: "road",
+              elementType: "geometry",
+              stylers: [
+                {
+                  hue: "#0060ff"
+                },
+                {
+                  saturation: "-85"
+                },
+                {
+                  lightness: "60"
+                },
+                {
+                  visibility: "on"
+                }
+              ]
+            },
+            {
+              featureType: "road",
+              elementType: "labels",
+              stylers: [
+                {
+                  hue: "#0060ff"
+                },
+                {
+                  saturation: "-70"
+                },
+                {
+                  lightness: "50"
+                },
+                {
+                  visibility: "off"
+                }
+              ]
+            },
+            {
+              featureType: "road.local",
+              elementType: "all",
+              stylers: [
+                {
+                  hue: "#0060ff"
+                },
+                {
+                  saturation: "0"
+                },
+                {
+                  lightness: "-11"
+                },
+                {
+                  visibility: "on"
+                }
+              ]
+            },
+            {
+              featureType: "transit",
+              elementType: "geometry",
+              stylers: [
+                {
+                  visibility: "simplified"
+                },
+                {
+                  hue: "#0060ff"
+                },
+                {
+                  lightness: "0"
+                },
+                {
+                  saturation: "0"
+                }
+              ]
+            },
+            {
+              featureType: "transit",
+              elementType: "labels",
+              stylers: [
+                {
+                  hue: "#0060ff"
+                },
+                {
+                  lightness: -100
+                },
+                {
+                  visibility: "off"
+                }
+              ]
+            },
+            {
+              featureType: "water",
+              elementType: "geometry",
+              stylers: [
+                {
+                  hue: "#0066ff"
+                },
+                {
+                  saturation: "0"
+                },
+                {
+                  lightness: 100
+                },
+                {
+                  visibility: "on"
+                }
+              ]
+            },
+            {
+              featureType: "water",
+              elementType: "labels",
+              stylers: [
+                {
+                  hue: "#000000"
+                },
+                {
+                  saturation: -100
+                },
+                {
+                  lightness: -100
+                },
+                {
+                  visibility: "off"
+                }
+              ]
+            }
+          ]}
+          initialCenter={{
+            lat: 51.509865,
+            lng: -0.118092
           }}
-        />
-      ))}
-    </Map>
+          google={google}
+          zoom={5}
+        >
+          {/* {testPlaces.map((i: any) => (
+            <Marker
+              key={i.place_id}
+              title={i.name}
+              position={{
+                lat: i.geometry.location.lat(),
+                lng: i.geometry.location.lng()
+              }}
+              icon={{
+                url: pin,
+                anchor: new google.maps.Point(20, 20),
+                scaledSize: new google.maps.Size(40, 40)
+              }}
+            />
+          ))} */}
+          {finalBusinesses.map((i: any, index: number) => (
+            <Marker
+              key={i.place_id}
+              title={i.name}
+              position={{
+                lat: i.geometry.location.lat(),
+                lng: i.geometry.location.lng()
+              }}
+              icon={{
+                url: pin,
+                anchor: new google.maps.Point(20, 20),
+                scaledSize: new google.maps.Size(40, 40)
+              }}
+              // onClick={onMarkerClick}
+            />
+          ))}
+          <InfoWindow
+            marker={activeMarker}
+            onClose={() => console.log("close")}
+            visible={visisble}
+          >
+            <div>
+              <h1>{selectedPlace && selectedPlace.title}</h1>
+              <h1>{selectedPlace && selectedPlace.label}</h1>
+            </div>
+          </InfoWindow>
+          {latLng && finalBusinesses.length > 0 ? (
+            <Circle
+              center={{ lat: latLng.lat(), lng: latLng.lng() }}
+              fillColor="#4da0ff"
+              strokeColor="#4da0ff"
+              fillOpacity={0.1}
+              strokeOpacity={0.1}
+              strokeWeight={3}
+              radius={1609.34}
+            />
+          ) : null}
+          <Circle
+            center={{ lat: testLatLng.lat, lng: testLatLng.lng }}
+            fillColor="#4da0ff"
+            strokeColor="#4da0ff"
+            fillOpacity={0.1}
+            strokeOpacity={0.1}
+            strokeWeight={3}
+            radius={1609.34}
+          />
+        </Map>
+      </div>
+      {latLng && finalBusinesses.length > 0 ? (
+        <Menu items={finalBusinesses} type={businessType} />
+      ) : null}
+      {loading ? <Spinner /> : null}
+    </div>
   );
 };
 
 export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_MAPS_KEY,
+  apiKey: `${process.env.REACT_APP_MAPS_KEY}`,
   libraries: ["places"],
   region: "GB"
 })(MapContainer);

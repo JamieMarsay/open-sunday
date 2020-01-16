@@ -1,9 +1,11 @@
+@font-face {
+  font-family: "Asap";
+  src: local("Asap"), url(./Asap-Regular.ttf) format("truetype");
+}
+
 // Our styles
 @import "./styles/Reset.scss";
 @import "./styles/App.scss";
 @import "./styles/Animations.scss";
 @import "./styles/Flex.scss";
 @import "./styles/Spacing.scss";
-
-// 3rd Party
-@import "~flexboxgrid/css/flexboxgrid.min.css";

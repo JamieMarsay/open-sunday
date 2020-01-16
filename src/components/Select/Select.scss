@@ -1,0 +1,16 @@
+.select {
+  position: relative;
+  display: inline-block;
+  min-width: 150px;
+  margin: 0 0.5rem;
+  border: 0;
+  padding: 0.5rem;
+  font-size: inherit;
+  background-color: #fff;
+  -webkit-appearance: none;
+  box-shadow: 2px 2px 4px 1px rgba(150, 150, 150, 0.1);
+
+  &__placeholder {
+    color: #f2f2f2;
+  }
+}

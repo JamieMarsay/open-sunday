@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Select from "@Components/Select/Select";
+import Input from "@Components/Input/Input";
 import "./Search.scss";
 
 const Search = () => {
@@ -22,21 +23,23 @@ const Search = () => {
   return (
     <div className="search">
       <div>
+        <h2>Open Sunday</h2>
         <p>
-          I'm looking for a{" "}
-          <Select options={["Bar", "Doctor"]} action={selectType} /> in{" "}
-          <input placeholder="Postcode" onChange={handlePostcode}></input>
+          I'm looking for a
+          <Select options={["Bar", "Doctor"]} action={selectType} />
+          near <Input placeholder="Postcode" action={handlePostcode} />
         </p>
 
         {postcode.length && !isValidPostcode(postcode) ? (
           <p>Please enter a valid, UK post code </p>
         ) : null}
-
+        {/* 
         {type.length && postcode.length && isValidPostcode(postcode) ? (
           <a
             href={`/results/${type.toLowerCase()}/${postcode.toLowerCase()}`}
           >{`Search for ${type}!`}</a>
-        ) : null}
+        ) : null} */}
+        <button disabled={!isValidPostcode(postcode)}>Go!</button>
       </div>
     </div>
   );

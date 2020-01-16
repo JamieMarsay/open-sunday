@@ -1,9 +1,10 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent } from "react";
 import { ISelect } from "./ISelect";
+import "./Select.scss";
 
 const Select: FunctionComponent<ISelect> = ({ options, action }) => {
   return (
-    <select onChange={action}>
+    <select className="select" onChange={action}>
       {options.map(option => (
         <option key={option}>{option}</option>
       ))}

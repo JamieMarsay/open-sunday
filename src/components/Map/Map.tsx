@@ -13,7 +13,10 @@ import Menu from "@Components/Menu/Menu";
 
 interface IMap {
   google: any;
+  businessType: any;
+  searchLocation: any;
 }
+
 const MapContainer: FunctionComponent<IMap> = ({
   businessType,
   searchLocation,
@@ -383,16 +386,16 @@ const MapContainer: FunctionComponent<IMap> = ({
               // onClick={onMarkerClick}
             />
           ))}
-          <InfoWindow
+          {/* <InfoWindow
             marker={activeMarker}
-            onClose={() => console.log("close")}
+            // onClose={() => console.log("close")}
             visible={visisble}
           >
             <div>
               <h1>{selectedPlace && selectedPlace.title}</h1>
               <h1>{selectedPlace && selectedPlace.label}</h1>
             </div>
-          </InfoWindow>
+          </InfoWindow> */}
           {latLng && finalBusinesses.length > 0 ? (
             <Circle
               center={{ lat: latLng.lat(), lng: latLng.lng() }}

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Typography from "@Components/Typography/Typography";
+import { AnchorButton } from "@Components/Buttons/Buttons";
 import Select from "@Components/Select/Select";
 import Input from "@Components/Input/Input";
 import "./Search.scss";
@@ -23,23 +25,35 @@ const Search = () => {
   return (
     <div className="search">
       <div>
-        <h2>Open Sunday</h2>
-        <p>
+        <Typography
+          className="m--bottom-xxl"
+          text="Open Sunday"
+          variant="h1"
+          size="large"
+        />
+        <p className="m--bottom-xxl">
           I'm looking for a
-          <Select options={["Bar", "Doctor"]} action={selectType} />
-          near <Input placeholder="Postcode" action={handlePostcode} />
+          <Select
+            className="m--left-s m--right-s"
+            options={["Bar", "Doctor"]}
+            action={selectType}
+          />
+          near{" "}
+          <Input
+            className="m--left-s m--right-s"
+            action={handlePostcode}
+            placeholder="Postcode"
+          />
         </p>
-
-        {postcode.length && !isValidPostcode(postcode) ? (
-          <p>Please enter a valid, UK post code </p>
-        ) : null}
-        {/* 
-        {type.length && postcode.length && isValidPostcode(postcode) ? (
-          <a
-            href={`/results/${type.toLowerCase()}/${postcode.toLowerCase()}`}
-          >{`Search for ${type}!`}</a>
-        ) : null} */}
-        <button disabled={!isValidPostcode(postcode)}>Go!</button>
+        <AnchorButton
+          text="Search!"
+          href={
+            type.length && isValidPostcode(postcode)
+              ? `/results/${type.toLowerCase()}/${postcode.toLowerCase()}`
+              : ""
+          }
+          className="centre"
+        />
       </div>
     </div>
   );

@@ -1,16 +1,45 @@
 .select {
-  position: relative;
-  display: inline-block;
   min-width: 150px;
-  margin: 0 0.5rem;
   border: 0;
+  border-radius: 5px;
   padding: 0.5rem;
   font-size: inherit;
   background-color: #fff;
   -webkit-appearance: none;
   box-shadow: 2px 2px 4px 1px rgba(150, 150, 150, 0.1);
+  transition: background-color 0.2s linear;
 
-  &__placeholder {
-    color: #f2f2f2;
+  &:hover {
+    color: #fff;
+    background-color: #4da0ff;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+  }
+
+  &__container {
+    display: inline-block;
+    position: relative;
+
+    &:hover {
+      &::after {
+        background-image: url("../../assets/arrow-down-white.svg");
+        transition: background-image 0.2s linear;
+      }
+    }
+
+    &::after {
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      width: 25px;
+      height: 25px;
+      content: "";
+      background-image: url("../../assets/arrow-down.svg");
+      background-repeat: no-repeat;
+      background-position: 50%;
+      transition: background-image 0.2s linear;
+    }
   }
 }

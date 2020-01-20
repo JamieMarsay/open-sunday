@@ -8,12 +8,14 @@ import {
 } from "google-maps-react";
 import Spinner from "@Components/Spinner/Spinner";
 import pin from "@Assets/pin.svg";
-import { testLatLng, testPlaces } from "@TestData/testData";
+import { testPlaces } from "@TestData/testData";
 import Menu from "@Components/Menu/Menu";
 import { mapOptions } from "./MapOptions";
 
 interface IMap {
   google: any;
+  searchLocation: any;
+  businessType: any;
 }
 const MapContainer: FunctionComponent<IMap> = ({
   searchLocation,
@@ -67,16 +69,12 @@ const MapContainer: FunctionComponent<IMap> = ({
               }}
             />
           ))}
-          <InfoWindow
-            onClose={() => console.log("close")}
-            marker={activeMarker}
-            visible={visisble}
-          >
+          {/* <InfoWindow marker={activeMarker} visible={visisble}>
             <div>
               <h1>{selectedPlace && selectedPlace.title}</h1>
               <h1>{selectedPlace && selectedPlace.label}</h1>
             </div>
-          </InfoWindow>
+          </InfoWindow> */}
           <Circle
             center={mapOptions.initialCenter}
             strokeColor="#4da0ff"

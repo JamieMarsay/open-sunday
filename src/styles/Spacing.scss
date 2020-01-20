@@ -6,7 +6,8 @@ $sizes: (
   "md": 1rem,
   "xmd": 1.25rem,
   "lg": 2rem,
-  "xl": 3rem
+  "xl": 3rem,
+  "xxl": 5rem
 );
 
 @each $name, $size in $sizes {

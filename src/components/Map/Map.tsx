@@ -13,7 +13,10 @@ import Menu from "@Components/Menu/Menu";
 
 interface IMap {
   google: any;
+  businessType: any;
+  searchLocation: any;
 }
+
 const MapContainer: FunctionComponent<IMap> = ({
   businessType,
   searchLocation,
@@ -33,8 +36,8 @@ const MapContainer: FunctionComponent<IMap> = ({
   // };
 
   const fetchPlaces = async (mapProps: any, map: any) => {
-    console.log(searchLocation);
-    console.log(businessType);
+    // console.log(searchLocation);
+    // console.log(businessType);
     const { google } = mapProps;
     const service = new google.maps.places.PlacesService(map);
     const geocoder = new google.maps.Geocoder();
@@ -107,7 +110,7 @@ const MapContainer: FunctionComponent<IMap> = ({
       });
 
     setFinalBusinesses(await setOpeningTimes());
-    toggleLoading(false);
+    // toggleLoading(false);
   };
 
   return (
@@ -352,48 +355,24 @@ const MapContainer: FunctionComponent<IMap> = ({
           google={google}
           zoom={5}
         >
-          {/* {testPlaces.map((i: any) => (
-            <Marker
-              key={i.place_id}
-              title={i.name}
-              position={{
-                lat: i.geometry.location.lat(),
-                lng: i.geometry.location.lng()
-              }}
-              icon={{
-                url: pin,
-                anchor: new google.maps.Point(20, 20),
-                scaledSize: new google.maps.Size(40, 40)
-              }}
-            />
-          ))} */}
-          {finalBusinesses.map((i: any, index: number) => (
-            <Marker
-              key={i.place_id}
-              title={i.name}
-              position={{
-                lat: i.geometry.location.lat(),
-                lng: i.geometry.location.lng()
-              }}
-              icon={{
-                url: pin,
-                anchor: new google.maps.Point(20, 20),
-                scaledSize: new google.maps.Size(40, 40)
-              }}
-              // onClick={onMarkerClick}
-            />
-          ))}
-          <InfoWindow
-            marker={activeMarker}
-            onClose={() => console.log("close")}
-            visible={visisble}
-          >
-            <div>
-              <h1>{selectedPlace && selectedPlace.title}</h1>
-              <h1>{selectedPlace && selectedPlace.label}</h1>
-            </div>
-          </InfoWindow>
-          {latLng && finalBusinesses.length > 0 ? (
+          {finalBusinesses.length &&
+            finalBusinesses.map((i: any, index: number) => (
+              <Marker
+                key={i.place_id}
+                title={i.name}
+                position={{
+                  lat: i.geometry.location.lat(),
+                  lng: i.geometry.location.lng()
+                }}
+                icon={{
+                  url: pin,
+                  anchor: new google.maps.Point(20, 20),
+                  scaledSize: new google.maps.Size(40, 40)
+                }}
+                // onClick={onMarkerClick}
+              />
+            ))}
+          {latLng ? (
             <Circle
               center={{ lat: latLng.lat(), lng: latLng.lng() }}
               fillColor="#4da0ff"
@@ -404,15 +383,6 @@ const MapContainer: FunctionComponent<IMap> = ({
               radius={1609.34}
             />
           ) : null}
-          <Circle
-            center={{ lat: testLatLng.lat, lng: testLatLng.lng }}
-            fillColor="#4da0ff"
-            strokeColor="#4da0ff"
-            fillOpacity={0.1}
-            strokeOpacity={0.1}
-            strokeWeight={3}
-            radius={1609.34}
-          />
         </Map>
       </div>
       {latLng && finalBusinesses.length > 0 ? (

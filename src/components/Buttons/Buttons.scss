@@ -1,0 +1,18 @@
+.button {
+  &--link {
+    border-radius: 5px;
+    padding: 0.5rem;
+    background-color: #fff;
+    color: inherit;
+    text-decoration: none;
+    font-size: inherit;
+    box-shadow: 2px 2px 4px 1px rgba(150, 150, 150, 0.1);
+    transition: background-color 0.2s linear;
+
+    &:hover {
+      color: #fff;
+      background-color: #4da0ff;
+      transition: background-color 0.2s linear;
+    }
+  }
+}

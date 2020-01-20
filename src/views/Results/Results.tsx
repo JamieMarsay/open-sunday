@@ -6,7 +6,7 @@ const Results = () => {
   const { type, location } = useParams();
   return (
     // <Map businessType={type} searchLocation={location} />
-    <TestMap />
+    <TestMap businessType={type} searchLocation={location} />
   );
 };
 

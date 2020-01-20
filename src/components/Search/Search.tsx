@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Typography from "@Components/Typography/Typography";
 import { AnchorButton } from "@Components/Buttons/Buttons";
+import { postcodeChecker } from "@Utils/postcodeChecker";
+import { allPlaceTypes } from "@Utils/allPlaceTypes";
 import Select from "@Components/Select/Select";
 import Input from "@Components/Input/Input";
 import "./Search.scss";
 
 const Search = () => {
-  const [type, setType] = useState("Bar");
+  const [type, setType] = useState(allPlaceTypes[0]);
   const [postcode, setPostcode] = useState("");
 
   const selectType = (e?: any) => {
@@ -17,44 +19,31 @@ const Search = () => {
     setPostcode(e.target.value);
   };
 
-  const isValidPostcode = (p: string) => {
-    var postcodeRegEx = /[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}/i;
-    return postcodeRegEx.test(p) && p.length <= 8;
-  };
-
   return (
     <div className="search">
-      <div>
-        <Typography
-          className="m--bottom-xxl"
-          text="Open Sunday"
-          variant="h1"
-          size="large"
+      <div className="flex flex--v-centre m--bottom-xxl">
+        <Typography text="I'm looking for a" />
+        <Select
+          className="m--left-s m--right-s"
+          options={allPlaceTypes}
+          action={selectType}
         />
-        <p className="m--bottom-xxl">
-          I'm looking for a
-          <Select
-            className="m--left-s m--right-s"
-            options={["Bar", "Doctor"]}
-            action={selectType}
-          />
-          near{" "}
-          <Input
-            className="m--left-s m--right-s"
-            action={handlePostcode}
-            placeholder="Postcode"
-          />
-        </p>
-        <AnchorButton
-          text="Search!"
-          href={
-            type.length && isValidPostcode(postcode)
-              ? `/results/${type.toLowerCase()}/${postcode.toLowerCase()}`
-              : ""
-          }
-          className="centre"
+        <Typography text="near" />
+        <Input
+          className="m--left-s m--right-s"
+          action={handlePostcode}
+          placeholder="Postcode"
         />
       </div>
+      <AnchorButton
+        href={
+          type.length && postcodeChecker(postcode)
+            ? `/results/${type.toLowerCase()}/${postcode.toLowerCase()}`
+            : ""
+        }
+        className="centre"
+        text="Search!"
+      />
     </div>
   );
 };

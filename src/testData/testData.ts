@@ -50,5 +50,25 @@ export const testPlaces = [
       }
     },
     place_id: 5
+  },
+  {
+    name: "Squire Gentleman's Barber",
+    geometry: {
+      location: {
+        lat: () => 53.839,
+        lng: () => -1.636
+      }
+    },
+    place_id: 6
+  },
+  {
+    name: "Quite a long business name at the Corn Exchange",
+    geometry: {
+      location: {
+        lat: () => 53.839,
+        lng: () => -1.636
+      }
+    },
+    place_id: 7
   }
 ];

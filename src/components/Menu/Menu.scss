@@ -2,15 +2,20 @@
   position: absolute;
   top: 10px;
   left: 10px;
-  max-width: 180px;
-  border-radius: 5%;
+  max-width: 250px;
+  border-radius: 5px;
   padding: 1rem;
   background-color: #fff;
   box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.1);
-  z-index: 999;
 
   &__title {
     border-bottom: 2px solid #f2f2f2;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  &__item {
+    border-radius: 5px;
+    padding: 0.5rem;
+    background-color: #f2f2f2;
   }
 }

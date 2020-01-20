@@ -8,7 +8,7 @@ import {
 } from "google-maps-react";
 import Spinner from "@Components/Spinner/Spinner";
 import pin from "@Assets/pin.svg";
-import { testLatLng, testPlaces } from "@TestData/testData";
+import { testPlaces } from "@TestData/testData";
 import Menu from "@Components/Menu/Menu";
 import { mapOptions } from "./MapOptions";
 

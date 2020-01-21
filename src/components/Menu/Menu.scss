@@ -2,15 +2,48 @@
   position: absolute;
   top: 10px;
   left: 10px;
-  max-width: 250px;
+  width: 95%;
   border-radius: 5px;
-  padding: 1rem;
   background-color: #fff;
   box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.1);
 
+  @media only screen and (min-width: 1024px) {
+    max-width: 230px;
+    padding: 1rem;
+  }
+
   &__title {
-    border-bottom: 2px solid #f2f2f2;
-    margin-bottom: 1rem;
+    @media only screen and (min-width: 1024px) {
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #f2f2f2;
+    }
+  }
+
+  &__inner {
+    padding: 1rem;
+
+    @media only screen and (min-width: 1024px) {
+      padding: 0;
+    }
+  }
+
+  &__nav {
+    height: 0px;
+    margin-top: 0;
+    overflow: hidden;
+    transition: all 0.2s linear;
+
+    &--open {
+      height: 250px;
+      margin-top: 1rem;
+      overflow: scroll;
+      transition: all 0.2s linear;
+    }
+
+    @media only screen and (min-width: 1024px) {
+      display: block;
+      height: auto;
+    }
   }
 
   &__item {
@@ -21,6 +54,14 @@
     &:hover {
       box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.1);
       transition: box-shadow 0.2s linear;
+    }
+  }
+
+  &__icon {
+    display: block;
+
+    @media only screen and (min-width: 1024px) {
+      display: none;
     }
   }
 }

@@ -15,7 +15,8 @@
       "@TestData/*": ["testData/*"],
       "@Context/*": ["context/*"],
       "@Assets/*": ["assets/*"],
-      "@Views/*": ["views/*"]
+      "@Views/*": ["views/*"],
+      "@Utils/*": ["utils/*"]
     }
   }
 }

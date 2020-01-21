@@ -1,4 +1,4 @@
 export interface IMenu {
-  items: any;
-  type: string;
+  title: string;
+  items: any[];
 }

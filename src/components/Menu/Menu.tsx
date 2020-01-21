@@ -1,15 +1,19 @@
 import React, { FunctionComponent } from "react";
+import Typography from "@Components/Typography/Typography";
+import { List, ListItem } from "@Components/List/List";
 import { IMenu } from "./IMenu";
 import "./Menu.scss";
 
-const Menu: FunctionComponent<IMenu> = ({ items, type }) => (
+const Menu: FunctionComponent<IMenu> = ({ items, title }) => (
   <div className="menu">
-    <h2 className="menu__title">{`${items.length} ${
-      items.length > 1 ? `${type}s` : type
-    } found!`}</h2>
-    {items.map((item: any) => (
-      <p>{item.name}</p>
-    ))}
+    <Typography text={title} variant="h2" className="menu__title" />
+    <List
+      children={items.map((item: any) => (
+        <ListItem key={item.name} className="menu__item">
+          {item.name}
+        </ListItem>
+      ))}
+    />
   </div>
 );
 

@@ -6,11 +6,12 @@ import {
   Circle,
   InfoWindow
 } from "google-maps-react";
+import { placeLookup } from "@Utils/placeLookup";
 import Spinner from "@Components/Spinner/Spinner";
-import pin from "@Assets/pin.svg";
 import { testPlaces } from "@TestData/testData";
 import Menu from "@Components/Menu/Menu";
 import { mapOptions } from "./MapOptions";
+import pin from "@Assets/pin.svg";
 
 interface IMap {
   google: any;
@@ -28,6 +29,7 @@ const MapContainer: FunctionComponent<IMap> = ({
   const [activeMarker, setActiveMarker] = useState();
   const [selectedPlace, setSelectedPlace] = useState();
   const [visisble, setVisible] = useState();
+  const placeExtras = placeLookup[businessType];
 
   // const onMarkerClick = (props, marker) => {
   //   setActiveMarker(marker);
@@ -86,8 +88,11 @@ const MapContainer: FunctionComponent<IMap> = ({
           />
         </Map>
       </div>
-      <Menu items={testPlaces} type="Bar" />
-      {loading ? <Spinner /> : null}
+      <Menu
+        title={`${testPlaces.length} ${placeExtras.plural} found! ${placeExtras.icon}`}
+        items={testPlaces}
+      />
+      {/* {loading ? <Spinner /> : null} */}
     </div>
   );
 };

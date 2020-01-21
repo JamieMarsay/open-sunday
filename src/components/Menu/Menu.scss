@@ -15,7 +15,12 @@
 
   &__item {
     border-radius: 5px;
-    padding: 0.5rem;
     background-color: #f2f2f2;
+    transition: box-shadow 0.2s linear;
+
+    &:hover {
+      box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.2s linear;
+    }
   }
 }

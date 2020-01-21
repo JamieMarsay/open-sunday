@@ -1,4 +1,9 @@
-export const placeLookup = {
+interface IPlace {
+  plural: string;
+  icon: string;
+}
+
+export const placeLookup: { [key: string]: IPlace } = {
   church: {
     plural: "Churches",
     icon: "⛪"

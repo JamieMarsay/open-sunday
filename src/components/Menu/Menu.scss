@@ -48,10 +48,10 @@
       margin-right: 0.5rem;
     }
 
-    &:last-child {
-      @include lg {
-        display: none;
-      }
-    }
+    // &:last-child {
+    //   @include lg {
+    //     display: none;
+    //   }
+    // }
   }
 }

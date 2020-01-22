@@ -1,5 +1,7 @@
+import { ChangeEvent } from "react";
+
 export interface ISelect {
-  action: () => void;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   className?: string;
   options: string[];
 }

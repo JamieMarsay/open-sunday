@@ -10,16 +10,17 @@ import Typography from "@Components/Typography/Typography";
 import Spinner from "@Components/Spinner/Spinner";
 import { placeLookup } from "@Utils/placeLookup";
 import { testPlaces } from "@TestData/testData";
-import { isMobile } from "@Utils/constants";
+import { isDestkop } from "@Utils/constants";
 import { mapOptions } from "./MapOptions";
 import Menu from "@Components/Menu/Menu";
 import pin from "@Assets/pin.svg";
 
 interface IMap {
+  searchLocation: string;
+  businessType: string;
   google: any;
-  searchLocation: any;
-  businessType: any;
 }
+
 const MapContainer: FunctionComponent<IMap> = ({
   searchLocation,
   businessType,
@@ -42,7 +43,7 @@ const MapContainer: FunctionComponent<IMap> = ({
   const fetchPlaces = async (mapProps: any, map: any) => {
     // setTimeout(() => toggleLoading(false), 3500);
     map.setCenter(mapOptions.initialCenter);
-    map.setZoom(isMobile ? 14 : 13);
+    map.setZoom(isDestkop ? 14 : 13);
     toggleLoading(false);
   };
 

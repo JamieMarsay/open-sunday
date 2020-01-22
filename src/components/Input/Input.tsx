@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { IInput } from "./IInput";
-import "./Input.scss";
 import clsx from "clsx";
+import "./Input.scss";
 
 const Input: FunctionComponent<IInput> = ({
   placeholder,

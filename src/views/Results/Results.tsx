@@ -1,13 +1,15 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
 import TestMap from "@Components/TestMap/TestMap";
 
-const Results = () => {
+const Results: FunctionComponent = () => {
   const { type, location } = useParams();
-  return (
-    // <Map businessType={type} searchLocation={location} />
-    <TestMap businessType={type} searchLocation={location} />
-  );
+  return type && location ? (
+    <TestMap
+      searchLocation={location as string}
+      businessType={type as string}
+    />
+  ) : null;
 };
 
 export default Results;

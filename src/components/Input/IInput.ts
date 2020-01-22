@@ -1,5 +1,6 @@
+import { ChangeEvent } from "react";
 export interface IInput {
+  action: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
-  action: () => void;
-  className: string;
+  className?: string;
 }

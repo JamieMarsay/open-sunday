@@ -1,3 +1,5 @@
+import pin from "@Assets/pin.svg";
+
 export const mapOptions = {
   initialCenter: {
     lat: 53.83797,

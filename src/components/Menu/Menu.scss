@@ -1,16 +1,35 @@
+@import "../../styles/Mixins.scss";
+
 .menu {
-  position: absolute;
+  position: relative;
   top: 10px;
-  left: 10px;
-  max-width: 250px;
+  width: 85%;
+  margin: 0 auto;
   border-radius: 5px;
   padding: 1rem;
   background-color: #fff;
   box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.1);
 
-  &__title {
-    border-bottom: 2px solid #f2f2f2;
-    margin-bottom: 1rem;
+  @include lg {
+    left: 10px;
+    width: 300px;
+    margin: 0;
+  }
+
+  &__nav {
+    height: 0px;
+    overflow: hidden;
+    transition: all 0.2s linear;
+
+    &--open {
+      height: 85vh;
+      overflow-y: auto;
+      transition: all 0.2s linear;
+    }
+
+    @include lg {
+      display: block;
+    }
   }
 
   &__item {
@@ -21,6 +40,18 @@
     &:hover {
       box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.1);
       transition: box-shadow 0.2s linear;
+    }
+  }
+
+  &__icon {
+    &:first-child {
+      margin-right: 0.5rem;
+    }
+
+    &:last-child {
+      @include lg {
+        display: none;
+      }
     }
   }
 }

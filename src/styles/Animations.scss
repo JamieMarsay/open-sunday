@@ -12,3 +12,18 @@
     opacity: 1;
   }
 }
+
+.slide {
+  &--left {
+    animation: slideLeft 0.2s 0s ease-in-out;
+  }
+}
+
+@keyframes slideLeft {
+  0% {
+    left: -10%;
+  }
+  100% {
+    left: 0;
+  }
+}

@@ -1,35 +1,30 @@
 import React, { FunctionComponent, useState } from "react";
 import Typography from "@Components/Typography/Typography";
 import { List, ListItem } from "@Components/List/List";
+import { isMobile } from "@Utils/constants";
+import searchIcon from "@Assets/search.svg";
 import Link from "@Components/Link/Link";
 import Icon from "@Components/Icon/Icon";
 import menuIcon from "@Assets/menu.svg";
-import searchIcon from "@Assets/search.svg";
 import { IMenu } from "./IMenu";
-import "./Menu.scss";
 import clsx from "clsx";
-import Grid from "@Components/Grid/Grid";
-import { AnchorButton } from "@Components/Buttons/Buttons";
+import "./Menu.scss";
 
 const Menu: FunctionComponent<IMenu> = ({ items, title }) => {
-  const [open, toggleOpen] = useState(false);
+  const [open, toggleOpen] = useState(isMobile && items.length > 0);
 
   return (
     <header className="menu slide--left">
       <div className="menu__inner">
-        <div className={"flex flex--v-centre flex--between"}>
-          <Typography className="menu__title" text={title} variant="h2" />
+        <div className="flex flex--v-centre flex--between">
+          <Typography text={title} variant="h2" />
           <span className="flex flex--end">
-            <Link
-              className="menu__icon m--right-md"
-              ariaLabel="New Search"
-              href="/home"
-            >
+            <Link className="menu__icon" ariaLabel="New Search" href="/home">
               <Icon src={searchIcon} alt="Search" />
             </Link>
             <Icon
               action={() => toggleOpen(!open)}
-              className="menu__icon"
+              className="menu__icon interactable"
               src={menuIcon}
               alt="Menu"
             />
@@ -37,12 +32,12 @@ const Menu: FunctionComponent<IMenu> = ({ items, title }) => {
         </div>
         <nav
           className={clsx("menu__nav", {
-            "menu__nav--open": open
+            "menu__nav--open m--top-md": open
           })}
         >
           <List
             children={items.map((item: any) => (
-              <ListItem key={item.name} className="menu__item">
+              <ListItem key={item.name} className="menu__item m--right-s">
                 <Link
                   href="https://google.com"
                   ariaLabel={item.name}

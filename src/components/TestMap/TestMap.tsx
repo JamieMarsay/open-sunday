@@ -7,10 +7,10 @@ import {
   Map
 } from "google-maps-react";
 import Typography from "@Components/Typography/Typography";
-import Toolbar from "@Components/Toolbar/Toolbar";
 import Spinner from "@Components/Spinner/Spinner";
 import { placeLookup } from "@Utils/placeLookup";
 import { testPlaces } from "@TestData/testData";
+import { isMobile } from "@Utils/constants";
 import { mapOptions } from "./MapOptions";
 import Menu from "@Components/Menu/Menu";
 import pin from "@Assets/pin.svg";
@@ -42,7 +42,7 @@ const MapContainer: FunctionComponent<IMap> = ({
   const fetchPlaces = async (mapProps: any, map: any) => {
     // setTimeout(() => toggleLoading(false), 3500);
     map.setCenter(mapOptions.initialCenter);
-    map.setZoom(13);
+    map.setZoom(isMobile ? 14 : 13);
     toggleLoading(false);
   };
 
@@ -102,10 +102,13 @@ const MapContainer: FunctionComponent<IMap> = ({
       {!loading ? (
         <Fragment>
           <Menu
-            title={`${testPlaces.length} ${placeExtras.plural} found! 🥳`}
+            title={
+              testPlaces.length > 0
+                ? `${testPlaces.length} ${placeExtras.plural} found! 🥳`
+                : `No ${placeExtras.plural} found! 😔`
+            }
             items={testPlaces}
           />
-          <Toolbar />
         </Fragment>
       ) : null}
     </div>

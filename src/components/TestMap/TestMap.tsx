@@ -1,4 +1,4 @@
-import React, { useState, FunctionComponent, Fragment } from "react";
+import React, { useState, FunctionComponent } from "react";
 import {
   GoogleApiWrapper,
   InfoWindow,
@@ -7,11 +7,10 @@ import {
   Map
 } from "google-maps-react";
 import Typography from "@Components/Typography/Typography";
+import { isDesktop, mapOptions } from "@Utils/constants";
 import Spinner from "@Components/Spinner/Spinner";
 import { placeLookup } from "@Utils/placeLookup";
 import { testPlaces } from "@TestData/testData";
-import { isDestkop } from "@Utils/constants";
-import { mapOptions } from "./MapOptions";
 import Menu from "@Components/Menu/Menu";
 import pin from "@Assets/pin.svg";
 
@@ -43,7 +42,7 @@ const MapContainer: FunctionComponent<IMap> = ({
   const fetchPlaces = async (mapProps: any, map: any) => {
     // setTimeout(() => toggleLoading(false), 3500);
     map.setCenter(mapOptions.initialCenter);
-    map.setZoom(isDestkop ? 14 : 13);
+    map.setZoom(isDesktop ? mapOptions.desktopZoom : mapOptions.mobileZoom);
     toggleLoading(false);
   };
 
@@ -101,16 +100,14 @@ const MapContainer: FunctionComponent<IMap> = ({
         </Map>
       </div>
       {!loading ? (
-        <Fragment>
-          <Menu
-            title={
-              testPlaces.length > 0
-                ? `${testPlaces.length} ${placeExtras.plural} found! 🥳`
-                : `No ${placeExtras.plural} found! 😔`
-            }
-            items={testPlaces}
-          />
-        </Fragment>
+        <Menu
+          title={
+            testPlaces.length > 0
+              ? `${testPlaces.length} ${placeExtras.plural} found! 🥳`
+              : `No ${placeExtras.plural} found! 😔`
+          }
+          items={testPlaces}
+        />
       ) : null}
     </div>
   );

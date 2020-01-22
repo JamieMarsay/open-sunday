@@ -22,9 +22,13 @@
     transition: all 0.2s linear;
 
     &--open {
-      height: 85vh;
+      height: 250px;
       overflow-y: auto;
       transition: all 0.2s linear;
+
+      @include lg {
+        height: 85vh;
+      }
     }
 
     @include lg {
@@ -47,11 +51,5 @@
     &:first-child {
       margin-right: 0.5rem;
     }
-
-    // &:last-child {
-    //   @include lg {
-    //     display: none;
-    //   }
-    // }
   }
 }

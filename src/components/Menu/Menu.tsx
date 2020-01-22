@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from "react";
 import Typography from "@Components/Typography/Typography";
 import { List, ListItem } from "@Components/List/List";
-import { isDestkop } from "@Utils/constants";
+import { isDesktop } from "@Utils/constants";
 import searchIcon from "@Assets/search.svg";
 import Link from "@Components/Link/Link";
 import Icon from "@Components/Icon/Icon";
@@ -11,7 +11,7 @@ import clsx from "clsx";
 import "./Menu.scss";
 
 const Menu: FunctionComponent<IMenu> = ({ items, title }) => {
-  const [open, toggleOpen] = useState(isDestkop && items.length > 0);
+  const [open, toggleOpen] = useState(isDesktop && items.length > 0);
 
   return (
     <header className="menu slide--left">
@@ -36,10 +36,13 @@ const Menu: FunctionComponent<IMenu> = ({ items, title }) => {
           })}
         >
           <List
-            children={items.map((item: any) => (
-              <ListItem key={item.name} className="menu__item m--right-s">
+            children={items.map((item: any, index) => (
+              <ListItem
+                className="menu__item m--right-s"
+                key={item.name + index}
+              >
                 <Link
-                  href="https://google.com"
+                  href="#"
                   ariaLabel={item.name}
                   children={item.name}
                   className="p--all-s"

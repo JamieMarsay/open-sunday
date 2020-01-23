@@ -1,27 +1,111 @@
 interface IPlace {
+  placesType: string
   plural: string;
-  icon: string;
 }
 
 export const placeLookup: { [key: string]: IPlace } = {
-  church: {
-    plural: "Churches",
-    icon: "⛪"
-  },
-  bar: {
+  Bar: {
     plural: "Bars",
-    icon: "🍺"
+    placesType: "bar"
   },
-  dentist: {
+  Bank: {
+    plural: "Banks",
+    placesType: "bank"
+  },
+  Cafe: {
+    plural: "Cafes",
+    placesType: "cafe"
+  },
+  "Car Park": {
+    plural: "Car Parks",
+    placesType: "parking"
+  },
+  Church: {
+    plural: "Churches",
+    placesType: "church"
+  },
+  Cinema: {
+    plural: "Cinemas",
+    placesType: "movie_theater"
+  },
+  Dentist: {
     plural: "Dentists",
-    icon: "👨‍⚕️"
+    placesType: "dentist"
   },
-  doctor: {
+  Doctor: {
     plural: "Doctors",
-    icon: "👩‍⚕️"
+    placesType: "doctor"
   },
-  pharmacy: {
+  "DIY Shop": {
+    plural: "DIY Shops",
+    placesType: "hardware_store"
+  },
+  Electrician: {
+    plural: "Electricians",
+    placesType: "electrician"
+  },
+  Florist: {
+    plural: "Florists",
+    placesType: "florist"
+  },
+  Gym: {
+    plural: "Gyms",
+    placesType: "gym"
+  },
+  Library: {
+    plural: "Libraries",
+    placesType: "library"
+  },
+  Locksmith: {
+    plural: "Locksmiths",
+    placesType: "locksmith"
+  },
+  Museum: {
+    plural: "Museums",
+    placesType: "museum"
+  },
+  "Night Club": {
+    plural: "Night Clubs",
+    placesType: "night_club"
+  },
+  Park: {
+    plural: "Parks",
+    placesType: "park"
+  },
+  Pharmacy: {
     plural: "Pharmacies",
-    icon: "💊"
-  }
+    placesType: "pharmacy"
+  },
+  "Petrol Station": {
+    plural: "Petrol Stations",
+    placesType: "gas_station"
+  },
+  "Pet Shop": {
+    plural: "Pet Shops",
+    placesType: "pet_store"
+  },
+  Plumber: {
+    plural: "Plumber",
+    placesType: "plumber"
+  },
+  "Post Office": {
+    plural: "Post Offices",
+    placesType: "post_office"
+  },
+  Restaurant: {
+    plural: "Restaurants",
+    placesType: "restaurant"
+  },
+  Salon: {
+    plural: "Salons",
+    placesType: "beauty_salon"
+  },
+  Supermarket: {
+    plural: "Supermarkets",
+    placesType: "supermarket"
+  },
+  Takeaway: {
+    plural:  "Takeaways",
+    placesType: "meal_takeaway"
+  },
 };

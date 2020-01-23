@@ -6,10 +6,12 @@ import {
   Circle,
   Map
 } from "google-maps-react";
+import Typography from "@Components/Typography/Typography";
 import { mapOptions, isDesktop } from "@Utils/constants";
 import Spinner from "@Components/Spinner/Spinner";
 import { placeLookup } from "@Utils/placeLookup";
 import Menu from "@Components/Menu/Menu";
+import Link from "@Components/Link/Link";
 import pin from "@Assets/pin.svg";
 
 interface IMap {
@@ -31,11 +33,11 @@ const MapContainer: FunctionComponent<IMap> = ({
   const [visisble, setVisible] = useState();
   const placeExtras = placeLookup[businessType];
 
-  // const onMarkerClick = (props, marker) => {
-  //   setActiveMarker(marker);
-  //   setSelectedPlace(props);
-  //   setVisible(true);
-  // };
+  const onMarkerClick = (props: any, marker: any) => {
+    setActiveMarker(marker);
+    setSelectedPlace(props);
+    setVisible(true);
+  };
 
   const fetchPlaces = async (mapProps: any, map: any) => {
     toggleLoading(true);
@@ -68,7 +70,7 @@ const MapContainer: FunctionComponent<IMap> = ({
           {
             location: { lat: location.lat(), lng: location.lng() },
             radius: 1609.34,
-            type: [`${businessType}`]
+            type: [`${placeExtras.placesType}`]
           },
           (results: any) => {
             res(results);
@@ -83,7 +85,15 @@ const MapContainer: FunctionComponent<IMap> = ({
         service.getDetails(
           {
             placeId: business.place_id,
-            fields: ["name", "geometry", "place_id", "opening_hours"]
+            fields: [
+              "name",
+              "geometry",
+              "place_id",
+              "opening_hours",
+              "website",
+              "url",
+              "formatted_phone_number"
+            ]
           },
           (place: any) => res(place)
         )
@@ -127,15 +137,18 @@ const MapContainer: FunctionComponent<IMap> = ({
           onReady={fetchPlaces}
           disableDefaultUI
           google={google}
-          // zoom={5}
         >
           {loading ? (
             <Spinner />
           ) : (
             finalBusinesses.map((i: any, index: number) => (
               <Marker
-                key={i.place_id}
-                title={i.name}
+                // @ts-ignore
+                details={{
+                  number: i.formatted_phone_number,
+                  website: i.website,
+                  url: i.url
+                }}
                 position={{
                   lat: i.geometry.location.lat(),
                   lng: i.geometry.location.lng()
@@ -145,27 +158,41 @@ const MapContainer: FunctionComponent<IMap> = ({
                   anchor: new google.maps.Point(20, 20),
                   scaledSize: new google.maps.Size(40, 40)
                 }}
-                // onClick={onMarkerClick}
+                onClick={onMarkerClick}
+                key={i.place_id}
+                title={i.name}
               />
             ))
           )}
-          {finalBusinesses.length &&
-            finalBusinesses.map((i: any, index: number) => (
-              <Marker
-                key={i.place_id}
-                title={i.name}
-                position={{
-                  lat: i.geometry.location.lat(),
-                  lng: i.geometry.location.lng()
-                }}
-                icon={{
-                  url: pin,
-                  anchor: new google.maps.Point(20, 20),
-                  scaledSize: new google.maps.Size(40, 40)
-                }}
-                // onClick={onMarkerClick}
-              />
-            ))}
+          {selectedPlace && (
+            <InfoWindow
+              marker={activeMarker}
+              visible={visisble}
+              google={google}
+              // @ts-ignore
+              map={null}
+            >
+              <div>
+                <Typography
+                  text={selectedPlace.title}
+                  variant="h3"
+                  className="m--bottom-s"
+                />
+                <Link
+                  ariaLabel={`Phone number ${selectedPlace.details.number}`}
+                  children={`Phone: ${selectedPlace.details.number}`}
+                  href={`tel:${selectedPlace.details.number}`}
+                  className="m--bottom-s"
+                />
+                <Link
+                  href={`${selectedPlace.details?.website ||
+                    selectedPlace.details.url}`}
+                  ariaLabel="Business website"
+                  children="Visit Website"
+                />
+              </div>
+            </InfoWindow>
+          )}
           {latLng ? (
             <Circle
               center={{ lat: latLng.lat(), lng: latLng.lng() }}

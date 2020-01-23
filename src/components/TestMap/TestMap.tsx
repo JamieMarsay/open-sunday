@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent, Fragment } from "react";
 import {
   GoogleApiWrapper,
-  InfoWindow,
+  // InfoWindow,
   Marker,
   Circle,
   Map
@@ -80,7 +80,7 @@ const MapContainer: FunctionComponent<IMap> = ({
               />
             ))
           )}
-          {selectedPlace && (
+          {/* {selectedPlace && (
             <InfoWindow
               marker={activeMarker}
               visible={visisble}
@@ -88,7 +88,7 @@ const MapContainer: FunctionComponent<IMap> = ({
             >
               <Typography text={selectedPlace.title} variant="h3" />
             </InfoWindow>
-          )}
+          )} */}
           <Circle
             center={mapOptions.initialCenter}
             strokeColor="#4da0ff"

@@ -2,14 +2,14 @@ const webpack = require("webpack");
 const path = require("path");
 const MiniCssExtract = require("mini-css-extract-plugin");
 const HTMLTemplate = require("html-webpack-plugin");
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 
 module.exports = (env, options) => {
-  const environment = dotenv.config().parsed;
-  const envKeys = Object.keys(environment).reduce((prev, next) => {
-    prev[`process.env.${next}`] = JSON.stringify(environment[next]);
-    return prev;
-  }, {});
+  // const environment = dotenv.config().parsed;
+  // const envKeys = Object.keys(environment).reduce((prev, next) => {
+  //   prev[`process.env.${next}`] = JSON.stringify(environment[next]);
+  //   return prev;
+  // }, {});
 
   return {
     entry: path.resolve(__dirname, "src/index.tsx"),

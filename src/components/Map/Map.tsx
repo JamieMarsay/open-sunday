@@ -194,7 +194,7 @@ const MapContainer: FunctionComponent<IMap> = ({
 };
 
 export default GoogleApiWrapper({
-  apiKey: `${process.env.REACT_APP_MAPS_KEY}`,
+  apiKey: "AIzaSyA8RET0mps3dz6mCCSmxlcxfDI-LcKyBco",
   LoadingContainer: Spinner,
   libraries: ["places"],
   region: "GB"

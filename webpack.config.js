@@ -47,7 +47,7 @@ module.exports = (env, options) => {
         chunkFilename:
           options.mode === "development" ? "[id].css" : "[id].[hash].css"
       }),
-      new webpack.DefinePlugin(envKeys)
+      // new webpack.DefinePlugin(envKeys)
     ],
     module: {
       rules: [

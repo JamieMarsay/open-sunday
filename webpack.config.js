@@ -29,6 +29,7 @@ module.exports = (env, options) => {
         ["@Utils"]: path.resolve(__dirname, "./src/utils/")
       }
     },
+    
     devServer: {
       contentBase: path.resolve(__dirname, "dist"),
       historyApiFallback: true
@@ -56,6 +57,16 @@ module.exports = (env, options) => {
           use: "ts-loader"
         },
         {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env"]
+            }
+          }
+        },
+        {
           test: /\.(s*)css$/,
           use: [
             {
@@ -75,7 +86,7 @@ module.exports = (env, options) => {
         {
           test: /\.(png|svg|jpg|gif|ttf)$/,
           use: ["file-loader"]
-        }
+        },
       ]
     }
   };

@@ -42,9 +42,17 @@ const Menu: FunctionComponent<IMenu> = ({ items, title }) => {
                 key={item.name + index}
               >
                 <Link
-                  href="#"
+                  href={item?.website || item.url}
                   ariaLabel={item.name}
                   children={item.name}
+                  className="p--all-s"
+                  target="_blank"
+                  rel="noopener"
+                />
+                <Link
+                  ariaLabel={`Phone number: ${item.formatted_phone_number}`}
+                  children={`Phone: ${item.formatted_phone_number}`}
+                  href={`tel:${item.formatted_phone_number}`}
                   className="p--all-s"
                   target="_blank"
                   rel="noopener"

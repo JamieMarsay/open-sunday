@@ -24,7 +24,8 @@ Using the Google Maps & Places APIs mixed with a teaspoon of React & TypeScript 
 - ~~Add links out to businesses~~
 - Add business star ratings
 - Add credit link to my own website (shameless plug)
-- Add new place types and lookups to match
+- ~~Add new place types and lookups to match~~
 - Add a nicer loading screen to replace the spinner
 - Add a distance select to increase/decrease search radius
-- Phase out remaining instances of "any"
+- Phase out remaining instances of "any" in TypeScript.
+- Fix bug with extra space after postcode, remove whitespace - e.g. "AB12 3CD "

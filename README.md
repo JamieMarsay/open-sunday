@@ -28,4 +28,4 @@ Using the Google Maps & Places APIs mixed with a teaspoon of React & TypeScript 
 - Add a nicer loading screen to replace the spinner
 - Add a distance select to increase/decrease search radius
 - Phase out remaining instances of "any" in TypeScript.
-- Fix bug with extra space after postcode, remove whitespace - e.g. "AB12 3CD "
+- Fix bug with extra space after postcode, remove whitespace after final character - e.g. "AB12 3CD "

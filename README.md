@@ -21,7 +21,7 @@ Using the Google Maps & Places APIs mixed with a teaspoon of React & TypeScript 
 ## Still to do (in no particular order)
 
 - Add validation on postcode fields / feed postcode error back to user
-- ~~Add links out to businesses
+- ~~Add links out to businesses~~
 - Add business star ratings
 - Add credit link to my own website (shameless plug)
 - Add new place types and lookups to match

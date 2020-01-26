@@ -3,12 +3,12 @@ import Link from "@Components/Link/Link";
 import "./Credit.scss";
 
 const Credit = () => (
-  <span className="credit m--all-md p--all-md border--rounded flex slide--right">
+  <span className="credit p--all-s border--rounded flex slide--right shadow--primary">
     Made by
     <Link
       href="https://www.jamiemarsay.uk"
       ariaLabel="Jamie Marsay website"
-      className="p--left-s"
+      className="p--left-xs"
       children="Jamie"
     />
   </span>

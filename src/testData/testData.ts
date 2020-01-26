@@ -34,7 +34,6 @@ export const testPlaces = [
       }
     },
     place_id: 3,
-    formatted_phone_number: "0113 321478",
     url: "https://www.google.com"
   },
   {
@@ -70,7 +69,6 @@ export const testPlaces = [
       }
     },
     place_id: 6,
-    formatted_phone_number: "0113 901447",
     website: "https://www.google.com"
   },
   {

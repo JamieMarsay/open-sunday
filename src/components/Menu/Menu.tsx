@@ -14,7 +14,7 @@ const Menu: FunctionComponent<IMenu> = ({ items, title }) => {
   const [open, toggleOpen] = useState(isDesktop && items.length > 0);
 
   return (
-    <header className="menu slide--left border--rounded">
+    <header className="menu slide--left border--rounded p--all-md shadow--primary">
       <div className="menu__inner">
         <div className="flex flex--v-centre flex--between">
           <Typography text={title} variant="h2" />
@@ -24,7 +24,7 @@ const Menu: FunctionComponent<IMenu> = ({ items, title }) => {
             </Link>
             <Icon
               action={() => toggleOpen(!open)}
-              className="menu__icon interactable"
+              className="menu__icon"
               src={menuIcon}
               alt="Menu"
             />
@@ -50,19 +50,21 @@ const Menu: FunctionComponent<IMenu> = ({ items, title }) => {
                   <Link
                     href={item?.website || item.url}
                     children={
-                      item.website
-                        ? `Website: ${item.website}`
-                        : "View on Google Maps"
+                      item.website ? "Visit website" : "View on Google Maps"
                     }
                     ariaLabel={item.name}
                     className="m--bottom-s"
                   />
                 </div>
-                <Link
-                  ariaLabel={`Phone number: ${item.formatted_phone_number}`}
-                  children={`Phone: ${item.formatted_phone_number}`}
-                  href={`tel:${item.formatted_phone_number}`}
-                />
+                {item.formatted_phone_number ? (
+                  <Link
+                    ariaLabel={`Phone number: ${item.formatted_phone_number}`}
+                    children={`Phone: ${item.formatted_phone_number}`}
+                    href={`tel:${item.formatted_phone_number}`}
+                  />
+                ) : (
+                  <Typography text="No phone number found" />
+                )}
               </ListItem>
             ))}
           />

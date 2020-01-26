@@ -2,13 +2,13 @@
 
 .credit {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  top: 90vh;
+  right: 1rem;
+  font-size: 14px;
   background-color: #fff;
   z-index: 999;
-  box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.1);
 
   @include lg {
-    bottom: 90vh;
+    top: 2vh;
   }
 }

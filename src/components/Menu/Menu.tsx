@@ -14,7 +14,7 @@ const Menu: FunctionComponent<IMenu> = ({ items, title }) => {
   const [open, toggleOpen] = useState(isDesktop && items.length > 0);
 
   return (
-    <header className="menu slide--left">
+    <header className="menu slide--left border--rounded">
       <div className="menu__inner">
         <div className="flex flex--v-centre flex--between">
           <Typography text={title} variant="h2" />
@@ -38,24 +38,30 @@ const Menu: FunctionComponent<IMenu> = ({ items, title }) => {
           <List
             children={items.map((item: any, index) => (
               <ListItem
-                className="menu__item m--right-s"
+                className="m--right-s m--bottom-md"
                 key={item.name + index}
               >
-                <Link
-                  href={item?.website || item.url}
-                  ariaLabel={item.name}
-                  children={item.name}
-                  className="p--all-s"
-                  target="_blank"
-                  rel="noopener"
+                <Typography
+                  className="m--bottom-s"
+                  text={item.name}
+                  variant="h3"
                 />
+                <div className="flex flex--v-centre">
+                  <Link
+                    href={item?.website || item.url}
+                    children={
+                      item.website
+                        ? `Website: ${item.website}`
+                        : "View on Google Maps"
+                    }
+                    ariaLabel={item.name}
+                    className="m--bottom-s"
+                  />
+                </div>
                 <Link
                   ariaLabel={`Phone number: ${item.formatted_phone_number}`}
                   children={`Phone: ${item.formatted_phone_number}`}
                   href={`tel:${item.formatted_phone_number}`}
-                  className="p--all-s"
-                  target="_blank"
-                  rel="noopener"
                 />
               </ListItem>
             ))}

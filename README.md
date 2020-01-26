@@ -27,5 +27,7 @@ Using the Google Maps & Places APIs mixed with a teaspoon of React & TypeScript 
 - ~~Add new place types and lookups to match~~
 - Add a nicer loading screen to replace the spinner
 - Add a distance select to increase/decrease search radius
-- Phase out remaining instances of "any" in TypeScript.
-- Fix mobile(?) bug with extra space after postcode, remove whitespace after final character - e.g. "AB12 3CD "
+- Add error handling on places/geocoding requests
+- Phase out remaining instances of "any" in TypeScript
+- Fix bug with extra space after postcode, remove whitespace after final character - e.g. "AB12 3CD "
+

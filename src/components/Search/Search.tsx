@@ -11,16 +11,14 @@ import "./Search.scss";
 const Search: FunctionComponent = () => {
   const [type, setType] = useState(Object.keys(placeLookup)[0]);
   const [postcode, setPostcode] = useState("");
-  
+
   const selectType = (event: ChangeEvent<HTMLSelectElement>) => {
     setType(event.target.value);
   };
-  
+
   const handlePostcode = (event: ChangeEvent<HTMLInputElement>) => {
     setPostcode(event.target.value);
   };
-  
-  console.log(Object.keys(placeLookup)[0])
 
   return (
     <div className="search centre">

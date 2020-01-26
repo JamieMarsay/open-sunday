@@ -1,0 +1,14 @@
+@import "../../styles/Mixins.scss";
+
+.credit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  z-index: 999;
+  box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.1);
+
+  @include lg {
+    bottom: 90vh;
+  }
+}

@@ -1,7 +1,8 @@
 import React, { FunctionComponent, ChangeEvent, useState } from "react";
 import Typography from "@Components/Typography/Typography";
-import { Button } from "@Components/Buttons/Buttons";
+import { removeWhiteSpace } from "@Utils/removeWhiteSpace";
 import { postcodeChecker } from "@Utils/postcodeChecker";
+import { Button } from "@Components/Buttons/Buttons";
 import { placeLookup } from "@Utils/placeLookup";
 import Select from "@Components/Select/Select";
 import { withRouter } from "react-router-dom";
@@ -19,7 +20,7 @@ const Search: FunctionComponent<ISearch> = ({ history }) => {
   };
 
   const handlePostcode = (event: ChangeEvent<HTMLInputElement>) => {
-    setPostcode(event.target.value);
+    setPostcode(removeWhiteSpace(event.target.value));
   };
 
   const submitQuery = () => {

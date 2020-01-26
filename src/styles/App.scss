@@ -34,3 +34,9 @@ body {
     cursor: pointer;
   }
 }
+
+.pos {
+  &--rel {
+    position: relative;
+  }
+}

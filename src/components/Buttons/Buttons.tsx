@@ -17,7 +17,7 @@ export const Button: FunctionComponent<IButton> = ({
   text
 }) => (
   <button
-    className={clsx({
+    className={clsx("button", {
       [`${className}`]: className
     })}
     onClick={() => action()}
@@ -36,7 +36,7 @@ export const AnchorButton: FunctionComponent<IAnchorButton> = ({
   href
 }) => (
   <a
-    className={clsx("button--link", {
+    className={clsx("button button--link", {
       [`${className}`]: className
     })}
     href={href}

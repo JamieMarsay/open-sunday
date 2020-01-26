@@ -23,8 +23,8 @@ const Menu: FunctionComponent<IMenu> = ({ items, title }) => {
               <Icon src={searchIcon} alt="Search" />
             </Link>
             <Icon
+              className="menu__icon interactable"
               action={() => toggleOpen(!open)}
-              className="menu__icon"
               src={menuIcon}
               alt="Menu"
             />

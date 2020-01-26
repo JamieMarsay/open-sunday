@@ -17,3 +17,9 @@ body {
     position: relative;
   }
 }
+
+.interactable {
+  &:hover {
+    cursor: pointer;
+  }
+}

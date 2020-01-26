@@ -4,14 +4,14 @@ import clsx from "clsx";
 import "./Select.scss";
 
 const Select: FunctionComponent<ISelect> = ({
-  options,
+  className,
   onChange,
-  className
+  options
 }) => {
   return (
-    <div className="select__container">
+    <div className="select__container pos--rel">
       <select
-        className={clsx("select", {
+        className={clsx("select p--all-s border--rounded shadow--primary", {
           [`${className}`]: className
         })}
         onChange={onChange}

@@ -17,10 +17,6 @@
   &--left {
     animation: slideLeft 0.2s 0s ease-in-out;
   }
-
-  &--right {
-    animation: slideRight 0.2s 0s ease-in-out;
-  }
 }
 
 @keyframes slideLeft {
@@ -29,15 +25,6 @@
   }
   100% {
     left: 0;
-  }
-}
-
-@keyframes slideRight {
-  0% {
-    right: -10%;
-  }
-  100% {
-    right: 0;
   }
 }
 

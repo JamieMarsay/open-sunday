@@ -1,11 +1,8 @@
 .input {
   width: 150px;
   border: none;
-  border-radius: 5px;
-  padding: 0.5rem;
   font-size: inherit;
   background-color: #fff;
-  box-shadow: 2px 2px 4px 1px rgba(150, 150, 150, 0.1);
   transition: background-color 0.2s linear;
 
   &:hover {

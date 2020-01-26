@@ -11,7 +11,7 @@ const Input: FunctionComponent<IInput> = ({
 }) => {
   return (
     <input
-      className={clsx("input", {
+      className={clsx("input p--all-s shadow--primary border--rounded", {
         [`${className}`]: className,
         [`${intent}`]: intent
       })}

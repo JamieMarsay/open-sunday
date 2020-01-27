@@ -30,4 +30,4 @@ Using the Google Maps & Places APIs mixed with a teaspoon of React & TypeScript 
 - Add error handling on places/geocoding requests
 - Phase out remaining instances of "any" in TypeScript
 - ~~Fix bug with extra space after postcode, remove whitespace after final character - e.g. "AB12 3CD "~~
-
+- Allow searching based off the first 3/4 characters of postcode i.e. "WF4" or "AL10"

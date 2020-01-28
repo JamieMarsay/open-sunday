@@ -1,12 +1,10 @@
-export const testLatLng = { lat: 53.83797, lng: -1.64036 };
-
 export const testPlaces = [
   {
     name: "Jamie's Jam Tarts",
     geometry: {
       location: {
-        lat: () => 53.83797,
-        lng: () => -1.64036
+        lat: () => 51.52,
+        lng: () => -0.13489
       }
     },
     place_id: 1,
@@ -17,8 +15,8 @@ export const testPlaces = [
     name: "Milly's Mashed Potato",
     geometry: {
       location: {
-        lat: () => 53.83797,
-        lng: () => -1.63111
+        lat: () => 51.52,
+        lng: () => -0.12234
       }
     },
     place_id: 2,
@@ -29,8 +27,8 @@ export const testPlaces = [
     name: "Pringles' Purrfect Pies",
     geometry: {
       location: {
-        lat: () => 53.83797,
-        lng: () => -1.63901
+        lat: () => 51.51599,
+        lng: () => -0.11349
       }
     },
     place_id: 3,
@@ -40,8 +38,8 @@ export const testPlaces = [
     name: "Socks' Sunday Roasts",
     geometry: {
       location: {
-        lat: () => 53.839,
-        lng: () => -1.63942
+        lat: () => 51.5,
+        lng: () => -0.10942
       }
     },
     place_id: 4,
@@ -52,8 +50,8 @@ export const testPlaces = [
     name: "Another Business Name",
     geometry: {
       location: {
-        lat: () => 53.839,
-        lng: () => -1.636
+        lat: () => 51.509865,
+        lng: () => -0.1345
       }
     },
     place_id: 5,
@@ -64,8 +62,8 @@ export const testPlaces = [
     name: "Squire Gentleman's Barber",
     geometry: {
       location: {
-        lat: () => 53.839,
-        lng: () => -1.636
+        lat: () => 51.50899,
+        lng: () => -0.12456
       }
     },
     place_id: 6,
@@ -75,8 +73,8 @@ export const testPlaces = [
     name: "Quite a long business name at the Corn Exchange",
     geometry: {
       location: {
-        lat: () => 53.839,
-        lng: () => -1.636
+        lat: () => 51.509865,
+        lng: () => -0.1
       }
     },
     place_id: 7,

@@ -132,6 +132,7 @@ const MapContainer: FunctionComponent<IMap> = ({
         <Map
           style={{ maxWidth: "1440px", height: "100%" }}
           initialCenter={mapOptions.initialCenter}
+          onClick={() => setVisible(false)}
           // @ts-ignore
           styles={mapOptions.styles}
           onReady={fetchPlaces}
@@ -172,23 +173,31 @@ const MapContainer: FunctionComponent<IMap> = ({
               // @ts-ignore
               map={null}
             >
-              <div>
+              <div className="m--all-s width--max-250">
                 <Typography
                   text={selectedPlace.title}
                   variant="h3"
                   className="m--bottom-s"
                 />
-                <Link
-                  ariaLabel={`Phone number ${selectedPlace.details.number}`}
-                  children={`Phone: ${selectedPlace.details.number}`}
-                  href={`tel:${selectedPlace.details.number}`}
-                  className="m--bottom-s"
-                />
+                {selectedPlace.details.number ? (
+                  <Link
+                    ariaLabel={`Phone number ${selectedPlace.details.number}`}
+                    children={`Phone: ${selectedPlace.details.number}`}
+                    href={`tel:${selectedPlace.details.number}`}
+                    className="m--bottom-s"
+                  />
+                ) : (
+                  <Typography text="No number found" className="m--bottom-s" />
+                )}
                 <Link
                   href={`${selectedPlace.details?.website ||
                     selectedPlace.details.url}`}
                   ariaLabel="Business website"
-                  children="Visit Website"
+                  children={
+                    selectedPlace.details.website
+                      ? "Visit website"
+                      : "View on Google Maps"
+                  }
                 />
               </div>
             </InfoWindow>
@@ -196,10 +205,10 @@ const MapContainer: FunctionComponent<IMap> = ({
           {latLng ? (
             <Circle
               center={{ lat: latLng.lat(), lng: latLng.lng() }}
-              fillColor="#4da0ff"
               strokeColor="#4da0ff"
-              fillOpacity={0.1}
+              fillColor="#4da0ff"
               strokeOpacity={0.1}
+              fillOpacity={0.1}
               strokeWeight={3}
               radius={1609.34}
             />

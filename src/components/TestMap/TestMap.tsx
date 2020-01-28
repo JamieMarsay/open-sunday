@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from "react";
 import {
   GoogleApiWrapper,
-  // InfoWindow,
+  InfoWindow,
   Marker,
   Circle,
   Map
@@ -12,6 +12,7 @@ import Spinner from "@Components/Spinner/Spinner";
 import { placeLookup } from "@Utils/placeLookup";
 import { testPlaces } from "@TestData/testData";
 import Menu from "@Components/Menu/Menu";
+import Link from "@Components/Link/Link";
 import pin from "@Assets/pin.svg";
 
 interface IMap {
@@ -40,7 +41,6 @@ const MapContainer: FunctionComponent<IMap> = ({
   };
 
   const fetchPlaces = async (mapProps: any, map: any) => {
-    // setTimeout(() => toggleLoading(false), 3500);
     map.setCenter(mapOptions.initialCenter);
     map.setZoom(isDesktop ? mapOptions.desktopZoom : mapOptions.mobileZoom);
     toggleLoading(false);
@@ -52,6 +52,7 @@ const MapContainer: FunctionComponent<IMap> = ({
         <Map
           style={{ maxWidth: "1440px", height: "100%" }}
           initialCenter={mapOptions.initialCenter}
+          onClick={() => setVisible(false)}
           // @ts-ignore
           styles={mapOptions.styles}
           onReady={fetchPlaces}
@@ -64,14 +65,20 @@ const MapContainer: FunctionComponent<IMap> = ({
           ) : (
             testPlaces.map((i: any) => (
               <Marker
-                icon={{
-                  scaledSize: new google.maps.Size(40, 40),
-                  anchor: new google.maps.Point(20, 20),
-                  url: pin
+                // @ts-ignore
+                details={{
+                  number: i.formatted_phone_number,
+                  website: i.website,
+                  url: i.url
                 }}
                 position={{
                   lat: i.geometry.location.lat(),
                   lng: i.geometry.location.lng()
+                }}
+                icon={{
+                  url: pin,
+                  anchor: new google.maps.Point(20, 20),
+                  scaledSize: new google.maps.Size(40, 40)
                 }}
                 onClick={onMarkerClick}
                 key={i.place_id}
@@ -79,15 +86,43 @@ const MapContainer: FunctionComponent<IMap> = ({
               />
             ))
           )}
-          {/* {selectedPlace && (
+          {selectedPlace && (
             <InfoWindow
               marker={activeMarker}
               visible={visisble}
               google={google}
+              // @ts-ignore
+              map={null}
             >
-              <Typography text={selectedPlace.title} variant="h3" />
+              <div className="m--all-s width--max-250">
+                <Typography
+                  text={selectedPlace.title}
+                  variant="h3"
+                  className="m--bottom-s"
+                />
+                {selectedPlace.details.number ? (
+                  <Link
+                    ariaLabel={`Phone number ${selectedPlace.details.number}`}
+                    children={`Phone: ${selectedPlace.details.number}`}
+                    href={`tel:${selectedPlace.details.number}`}
+                    className="m--bottom-s"
+                  />
+                ) : (
+                  <Typography text="No number found" className="m--bottom-s" />
+                )}
+                <Link
+                  href={`${selectedPlace.details?.website ||
+                    selectedPlace.details.url}`}
+                  ariaLabel="Business website"
+                  children={
+                    selectedPlace.details.website
+                      ? "Visit website"
+                      : "View on Google Maps"
+                  }
+                />
+              </div>
             </InfoWindow>
-          )} */}
+          )}
           <Circle
             center={mapOptions.initialCenter}
             strokeColor="#4da0ff"
